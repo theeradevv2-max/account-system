@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Account System</title>
+
+<style>
+
+body{
+    background:#1e1e1e;
+    font-family:Arial;
+    color:white;
+    text-align:center;
+}
+
+.container{
+    margin-top:80px;
+}
+
+input{
+    padding:8px;
+    margin:5px;
+    width:200px;
+}
+
+button{
+    padding:10px;
+    width:220px;
+    margin:8px;
+}
+
+.box{
+    display:none;
+    margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Welcome</h1>
+
+<button onclick="showLogin()">Login</button>
+<br>
+<button onclick="showSignup()">Sign Up</button>
+
+
+<div id="loginBox" class="box">
+
+<h2>Login</h2>
+
+<input id="loginUser" placeholder="Username"><br>
+<input id="loginPass" type="password" placeholder="Password"><br>
+
+<button onclick="login()">Login</button>
+
+<p id="loginMsg"></p>
+
+</div>
+
+
+<div id="signupBox" class="box">
+
+<h2>Create Account</h2>
+
+<input id="signupUser" placeholder="Username"><br>
+<input id="signupPass" type="password" placeholder="Password"><br>
+
+<button onclick="signup()">Create Account</button>
+
+<p id="signupMsg"></p>
+
+</div>
+
+</div>
+
+
+<script>
+
+function showLogin(){
+document.getElementById("loginBox").style.display="block"
+document.getElementById("signupBox").style.display="none"
+}
+
+function showSignup(){
+document.getElementById("signupBox").style.display="block"
+document.getElementById("loginBox").style.display="none"
+}
+
+
+function signup(){
+
+let u = document.getElementById("signupUser").value
+let p = document.getElementById("signupPass").value
+
+if(localStorage.getItem(u)){
+document.getElementById("signupMsg").innerText="Username already exists"
+return
+}
+
+localStorage.setItem(u,p)
+
+document.getElementById("signupMsg").innerText="Account created"
+
+}
+
+
+function login(){
+
+let u = document.getElementById("loginUser").value
+let p = document.getElementById("loginPass").value
+
+let saved = localStorage.getItem(u)
+
+if(saved === p){
+document.getElementById("loginMsg").innerText="Login successful"
+}
+else{
+document.getElementById("loginMsg").innerText="Incorrect username or password"
+}
+
+}
+
+</script>
+
+</body>
+</html>
